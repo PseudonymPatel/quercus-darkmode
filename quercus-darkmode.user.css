@@ -1,0 +1,238 @@
+/* ==UserStyle==
+@name           Quercus Dark Mode BETA
+@namespace    https://github.com/PseudonymPatel/qercus-darkmode
+@homepageURL  https://github.com/PseudonymPatel/quercus-darkmode
+@updateURL    https://raw.githubusercontent.com/PseudonymPatel/quercus-darkmode/master/quercus-darkmode.user.css
+@version        0.0.1
+@description    UofT quercus (customizable, dynamic) darkmode
+@author         Me
+@preprocessor	less
+
+@var color main-color "Main color for everything to be based on. Also try #000005" #121212
+@var color border-color "Color to make borders" #676767
+@var number first-layer-brightness "How bright to make first level of brightness (0 - 100%)" [8, 0, 100, 1, "%"]
+@var number second-layer-brightness "brightness of second level of brightness (0 - 100%)" [12, 0, 100, 1, "%"]
+@var color accent-color "Color to make blue things/accent" #1190d0
+@var color main-text-color "Color to make majority of text." #bec0ca
+
+==/UserStyle== */
+@-moz-document url-prefix("https://q.utoronto.ca/") {
+	:root {
+		--bradius: 5px;
+		--accent-hue: hue(@accent-color);
+		
+	}
+	
+	body {
+		background: @main-color;
+		color: @main-text-color;
+	}
+
+	a {
+		color: darken(@accent-color, @first-layer-brightness);
+	}
+	
+	a:hover {
+		color: lighten(@accent-color, @first-layer-brightness);
+		transition: 0.25s ease;
+		text-decoration: none !important;
+	}
+	
+	/* Naviagtion Bar */
+	#header {
+		background-color: lighten(@main-color, @second-layer-brightness);
+		
+		> div > div {
+			background-color: transparent;
+			
+			a {
+				background-image: none;
+			}
+		}
+		
+		.ic-app-header__menu-list-link .ic-icon-svg {
+			color: 	@main-text-color;
+			fill: @main-text-color;
+		}
+		
+		.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-icon-svg {
+			fill: @main-color;
+		}
+		
+		.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-app-header__menu-list-link {
+			background: @accent-color;
+		}
+		
+		.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .menu-item__text {
+			color: @main-color;
+		}
+		
+	}
+	
+	#nav-tray-portal {
+		div.tray-with-space-for-global-nav {
+				background: lighten(@main-color, @first-layer-brightness);
+		}
+		
+		ul li {
+			color: lighten(@main-text-color, @first-layer-brightness);
+			
+			a {
+				color: lighten(@accent-color, @first-layer-brightness);
+			}
+		}
+	}
+	
+	/* NOTIFICATION BUBBLES */
+	
+	.ic-notification {
+		border-color: @accent-color;
+		margin-top: 10px;
+		border-radius: var(--bradius);
+	}
+	
+	.ic-notification__icon {
+		background-color: @accent-color;
+	}
+	
+	.notification_account_content, .ic-notification__content {
+		background-color: lighten(@main-color, @first-layer-brightness);
+		border-color: @accent-color !important;
+		border-radius: var(--bradius);
+	}
+	
+	/* DASHBOARD */
+	
+	.ic-Dashboard-header__layout {
+		background: lighten(@main-color, @first-layer-brightness);
+		border-width: 0;
+		border-radius: var(--bradius) 0;
+	}
+	
+	.ic-Dashboard-header__title {
+		padding-left: 20px;
+	}
+	
+	#dashboard-planner-header {
+		div {
+			background-color: transparent;
+			
+			button, button span {
+				background-color: desaturate(@accent-color, 70%);
+				border-color: transparent;
+				border-radius: var(--bradius);
+				color: lighten(@main-text-color, 20%);
+			}
+		}
+		background-color: transparent;
+	}
+	
+	.planner-day, .planner-empty-days {
+		background-color: @main-color;
+		color: darken(@main-text-color, 10); /* TODO: improve */
+		
+		border-color: transparent;
+		h2 {
+			font-weight: 700;
+			border-color: transparent;
+		}
+	}
+	
+	/* Dashboard line items */
+	.planner-grouping {
+		
+		> a span {
+			background: lighten(@main-color, @first-layer-brightness);
+		}
+		
+		::after {
+			background: none;
+		}
+		
+		ol {
+			background-color: lighten(@main-color, @first-layer-brightness);
+			border-width: 5px;
+			border-top-right-radius: var(--bradius);
+			border-bottom-right-radius: var(--bradius);
+		}
+		
+		.NotificationBadge-styles__activityIndicator div span {
+			background-color: @accent-color;
+		}
+		
+		.planner-item {
+			border-color: @main-color; /* TODO: how to make this course color? */
+			
+			span {
+				color: @main-text-color;
+			}
+			
+			a span, div button span {
+				color: @accent-color;
+			}
+		}
+	}
+	
+}
+@-moz-document regexp("https://q.utoronto.ca/courses/.*") {
+	
+	#breadcrumbs, #breadcrumbs > ul > li + li:last-of-type a {
+		background-color: @main-color;
+		color: @accent-color;
+	}
+	
+	.list-view a.active {
+		color: @accent-color;
+		border: none;
+		margin-left: 10px;
+	}
+	
+	.header-bar {
+		border-bottom: none;
+		
+		.header-bar-right div span {
+			color: @accent-color;
+		}
+	}
+	
+	#content > div {
+		background-color: @main-color;
+		
+		.list-view a.active {
+			color: red;
+		}
+		
+		.header-bar {
+			background-color: @main-color;
+			border: none;
+		}
+		
+		.ig-list {
+			background-color: @main-color;
+		}
+		
+		.item-group-condensed .ig-header {
+			background-color: lighten(@main-color, @second-layer-brightness);
+			border: none;
+			border-radius: var(--bradius) var(--bradius) 0 0;
+			color: @main-text-color;
+			
+			h2 button, .name {
+				color: @main-text-color;
+				text-shadow: none;
+			}
+		}
+		
+		.item-group-condensed .ig-row {
+			background-color: lighten(@main-color, @first-layer-brightness);
+			color: @main-text-color;
+			border-color: @main-color;
+			border-left: none;
+			border-right: none;
+		}
+		
+		.ig-list .ig-row a.ig-title {
+			color: @accent-color;
+		}
+	}
+}
