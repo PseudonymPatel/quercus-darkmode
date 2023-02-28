@@ -38,6 +38,7 @@
 		text-decoration: none !important;
 	}
 	
+	
 	/* Naviagtion Bar */
 	#header {
 		background-color: lighten(@main-color, @second-layer-brightness);
@@ -181,6 +182,10 @@
 		color: @accent-color;
 	}
 	
+	.item-group-container {
+		background: none;
+	}
+	
 	.list-view a.active {
 		color: @accent-color;
 		border: none;
@@ -193,6 +198,28 @@
 		.header-bar-right div span {
 			color: @accent-color;
 		}
+	}
+	
+	.btn {
+		background: darken(@accent-color, 50);
+		border: none;
+		color: @main-text-color;
+		
+	}
+	
+	.btn:hover {
+		background: darken(@accent-color, 25);
+		color: contrast(darken(@accent-color, 25), @main-color, @main-text-color, 57%);
+	}
+	
+	#right-side .ToDoSidebarItem__Icon, #right-side .ToDoSidebarItem__Info li {
+		color: @main-text-color;
+	}
+	#right-side .ToDoSidebarItem__Info > span {
+		color: lighten(@accent-color, 20);
+	}
+	#right-side .ToDoSidebarItem__Info a span {
+		color: @accent-color;
 	}
 	
 	#content > div {
@@ -234,5 +261,22 @@
 		.ig-list .ig-row a.ig-title {
 			color: @accent-color;
 		}
+		
+		.ic-Table.ic-Table--hover-row :is(tbody, thead) :is(td, th) {
+			border-color: lighten(@main-color, @second-layer-brightness);
+		}
+		
+		.ic-Table.ic-Table--hover-row tbody tr:hover {
+			background: lighten(@main-color, @first-layer-brightness);
+		}
+	}
+	
+	#syllabus tr.date.date_passed td, #syllabus tr.date.date_passed th {
+		background: lighten(@main-color, @first-layer-brightness);
+		border-color: darken(@main-text-color, @first-layer-brightness);
+	}
+	
+	#syllabus tr.date.related td, #syllabus tr.date.related th, #syllabus tr.date.selected td, #syllabus tr.date.selected th {
+		background: lighten(@main-color, @second-layer-brightness);
 	}
 }
