@@ -3,7 +3,7 @@
 @namespace    https://github.com/PseudonymPatel/qercus-darkmode
 @homepageURL  https://github.com/PseudonymPatel/quercus-darkmode
 @updateURL    https://raw.githubusercontent.com/PseudonymPatel/quercus-darkmode/master/quercus-darkmode.user.css
-@version        0.0.2
+@version        0.0.3
 @description    UofT quercus (customizable, dynamic) darkmode
 @author         Me
 @preprocessor	less
@@ -20,7 +20,11 @@
 	:root {
 		--bradius: 5px;
 		--accent-hue: hue(@accent-color);
-		
+		--line-color: lighten(@main-color, @second-layer-brightness);
+		--gen-button-color: darken(@accent-color, 30);
+		--gen-button-color-hov: darken(@accent-color, 20);
+		--gen-button-color-important: darken(@accent-color, 20);
+		--gen-button-color-important-hov: darken(@accent-color, 10);
 	}
 	
 	body {
@@ -38,6 +42,11 @@
 		text-decoration: none !important;
 	}
 	
+	textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+		background: @main-color;
+		border: none;
+		color: @main-text-color;
+	}
 	
 	/* Naviagtion Bar */
 	#header {
@@ -119,7 +128,7 @@
 			background-color: transparent;
 			
 			button, button span {
-				background-color: desaturate(@accent-color, 70%);
+				background-color: var(--gen-button-color-important);
 				border-color: transparent;
 				border-radius: var(--bradius);
 				color: lighten(@main-text-color, 20%);
@@ -174,6 +183,21 @@
 		}
 	}
 	
+	/* PDF Viewer */
+	body > span > span > span {
+		overflow: clip !important;
+	}
+	
+	/* PDF viewer scroll fixes */
+	#doc_preview iframe {
+		min-height: auto !important;
+		height: 100% !important;
+	}
+	#doc_preview > div {
+		height: 100% !important;
+		border: none;
+		overflow: clip !important;
+	}
 }
 @-moz-document regexp("https://q.utoronto.ca/courses/.*") {
 	
@@ -201,15 +225,19 @@
 	}
 	
 	.btn {
-		background: darken(@accent-color, 50);
+		background: var(--gen-button-color);
 		border: none;
 		color: @main-text-color;
 		
 	}
 	
 	.btn:hover {
-		background: darken(@accent-color, 25);
-		color: contrast(darken(@accent-color, 25), @main-color, @main-text-color, 57%);
+		background: var(--gen-button-color-hov);
+		color: contrast(var(--gen-button-color-hov), @main-color, @main-text-color, 57%);
+	}
+	
+	.ic-app-nav-toggle-and-crumbs {
+		border-color: var(--line-color);
 	}
 	
 	#right-side .ToDoSidebarItem__Icon, #right-side .ToDoSidebarItem__Info li {
@@ -223,6 +251,7 @@
 	}
 	
 	#content > div {
+		 
 		background-color: @main-color;
 		
 		.list-view a.active {
@@ -269,6 +298,74 @@
 		.ic-Table.ic-Table--hover-row tbody tr:hover {
 			background: lighten(@main-color, @first-layer-brightness);
 		}
+		
+		.btn-primary, .Button--primary {
+			background: var(--gen-button-color-important);
+		}
+		
+		.btn-primary:hover, .Button--primary:hover {
+			background: var(--gen-button-color-important-hov);
+			transition: 0.1s;
+		}
+		
+		--inset-bg-color: lighten(@main-color, @first-layer-brightness);
+		
+		.ui-tabs .ui-tabs-nav {
+			border-color: @accent-color;
+		}
+		.ui-tabs .ui-tabs-nav li {
+			background-color: var(--inset-bg-color);
+			border: 1px solid @accent-color;
+			border-radius: var(--bradius) var(--bradius) 0 0;
+		}
+		
+		.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+			background: var(--inset-bg-color);
+			
+			a {
+				color: @main-text-color;
+			}
+		}
+		
+		.ui-tabs .ui-tabs-panel {
+			background: var(--inset-bg-color);
+			border-color: @accent-color;
+			border-radius: 0 0 var(--bradius) var(--bradius);
+			color: @main-text-color;
+			
+			.Button--link {
+				color: @accent-color;
+			}
+			
+			.button-container button {
+				background-color: var(--gen-button-color-important);
+			}
+			
+			.button-container button:hover {
+				background-color: var(--gen-button-color-important-hov);
+				transition: 0.1s;
+			}
+		}
+		
+		.module-sequence-footer .module-sequence-footer-content {
+			background: none;
+			border: none;
+			
+			.Button {
+				background: var(--gen-button-color);
+				color: @main-text-color;
+				border: none;
+			}
+			
+			.Button:hover {
+				background: var(--gen-button-color-hov);
+				transition: 0.1s;
+			}
+		}
+	}
+	
+	#assignment_show .student-assignment-overview {
+		border-color: var(--line-color);
 	}
 	
 	#syllabus tr.date.date_passed td, #syllabus tr.date.date_passed th {
