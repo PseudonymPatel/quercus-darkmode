@@ -3,7 +3,7 @@
 @namespace    https://github.com/PseudonymPatel/qercus-darkmode
 @homepageURL  https://github.com/PseudonymPatel/quercus-darkmode
 @updateURL    https://raw.githubusercontent.com/PseudonymPatel/quercus-darkmode/master/quercus-darkmode.user.css
-@version        0.0.3
+@version        0.0.4
 @description    UofT quercus (customizable, dynamic) darkmode
 @author         Me
 @preprocessor	less
@@ -43,21 +43,30 @@
 	}
 	
 	textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-		background: @main-color;
-		border: none;
-		color: @main-text-color;
+		background: @main-color !important;
+		border: none !important;
+		color: @main-text-color !important;
 	}
 	
 	/* Naviagtion Bar */
 	#header {
 		background-color: lighten(@main-color, @second-layer-brightness);
 		
-		> div > div {
+		> div > div { /* Quercus top left logo */
 			background-color: transparent;
+			height: 0;
 			
 			a {
 				background-image: none;
 			}
+		}
+		
+		div:first-of-type ul  {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			justify-content: center;
+			
 		}
 		
 		.ic-app-header__menu-list-link .ic-icon-svg {
@@ -79,6 +88,30 @@
 		
 	}
 	
+	span[dir="ltr"] > span {
+		background: lighten(@main-color, @first-layer-brightness);
+		
+		> span, ul[role="menu"], ul[role="menu"] span {
+			border-width: 0px !important;
+			background: lighten(@main-color, @second-layer-brightness);
+			color: @main-text-color; 
+		}
+			
+		div {
+			background: transparent;
+			color: @main-text-color; 
+		}
+		
+		
+		label, label span {
+			color: @main-text-color;
+		}
+		
+		button span {
+			color: @main-text-color;
+		}
+	}
+	
 	#nav-tray-portal {
 		div.tray-with-space-for-global-nav {
 				background: lighten(@main-color, @first-layer-brightness);
@@ -90,6 +123,10 @@
 			a {
 				color: lighten(@accent-color, @first-layer-brightness);
 			}
+		}
+		
+		.navigation-tray-container > div {
+			height: 100vh;
 		}
 	}
 	
@@ -135,6 +172,12 @@
 			}
 		}
 		background-color: transparent;
+	}
+	
+	#DashboardOptionsMenu_Container span {
+		border-color: transparent;
+		border-radius: var(--bradius);
+		color: @accent-color;
 	}
 	
 	.planner-day, .planner-empty-days {
@@ -183,6 +226,23 @@
 		}
 	}
 	
+	/* Dashboard card mode */
+	.ic-DashboardCard {
+		background: lighten(@main-color, @first-layer-brightness);
+		
+		svg {
+			fill: @main-text-color;
+		}
+		
+		.ic-DashboardCard__header_content {
+			background: transparent;
+			
+			.ic-DashboardCard__header-subtitle, .ic-DashboardCard__header-term {
+				color: @main-text-color;
+			}
+		}
+	}
+	
 	/* PDF Viewer */
 	body > span > span > span {
 		overflow: clip !important;
@@ -199,7 +259,7 @@
 		overflow: clip !important;
 	}
 }
-@-moz-document regexp("https://q.utoronto.ca/courses/.*") {
+@-moz-document regexp("https://q.utoronto.ca/courses/.*"), url-prefix("https://q.utoronto.ca/profile"), url-prefix("https://q.utoronto.ca/files") {
 	
 	#breadcrumbs, #breadcrumbs > ul > li + li:last-of-type a {
 		background-color: @main-color;
@@ -368,12 +428,43 @@
 		border-color: var(--line-color);
 	}
 	
+	#syllabus tr th, #syllabus td {
+		border-color: lighten(lighten(@main-color, @second-layer-brightness), 10);
+	}
 	#syllabus tr.date.date_passed td, #syllabus tr.date.date_passed th {
 		background: lighten(@main-color, @first-layer-brightness);
-		border-color: darken(@main-text-color, @first-layer-brightness);
+		border-color: lighten(lighten(@main-color, @second-layer-brightness), 10);
 	}
 	
 	#syllabus tr.date.related td, #syllabus tr.date.related th, #syllabus tr.date.selected td, #syllabus tr.date.selected th {
 		background: lighten(@main-color, @second-layer-brightness);
+	}
+	
+	#syllabusTableBody {
+		border-radius: 99px;
+		border-spacing: 50px;
+		
+		tr {
+			border-spacing: 5px;
+			border-radius: var(--bradius);
+		}	
+	}
+}
+
+@-moz-document url-prefix("https://canvadocs-yul-prod.inscloudgate.net/1/sessions") {
+	nav.ViewerControls, nav.ViewerControls button {
+		background: lighten(@main-color, @first-layer-brightness);
+	}
+	
+	.AnnotationControlButton-outer {
+		border: none !important;
+	}
+	
+	.Pages {
+		background: @main-color;
+	}
+	
+	.Page-container {
+		border: none !important;
 	}
 }
