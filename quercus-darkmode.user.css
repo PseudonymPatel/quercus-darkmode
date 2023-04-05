@@ -3,7 +3,7 @@
 @namespace    https://github.com/PseudonymPatel/qercus-darkmode
 @homepageURL  https://github.com/PseudonymPatel/quercus-darkmode
 @updateURL    https://raw.githubusercontent.com/PseudonymPatel/quercus-darkmode/master/quercus-darkmode.user.css
-@version        0.0.4
+@version        0.0.5
 @description    UofT quercus (customizable, dynamic) darkmode
 @author         Me
 @preprocessor	less
@@ -50,6 +50,16 @@
 	
 	/* Naviagtion Bar */
 	#header {
+		
+		/*
+		top: unset;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 10vh;
+		width: 100vw;
+		*/
+		
 		background-color: lighten(@main-color, @second-layer-brightness);
 		
 		> div > div { /* Quercus top left logo */
@@ -422,9 +432,57 @@
 				transition: 0.1s;
 			}
 		}
+		
+		/* QUIZ STUFF */
+		.muted-notice {
+			background: lighten(@main-color, @first-layer-brightness);
+			color: @main-text-color;
+			border-color: @border-color;
+			text-shadow: none;
+		}
 	}
 	
-	#assignment_show .student-assignment-overview {
+	/* QUIZ FILLING */
+	.quiz-header .ic-Table td, .ic-Table th {
+		border-color: @border-color !important;
+	}
+	
+	.quiz-submission, .question_editing {
+		background-color: @main-color;
+		border: none;
+		
+		.quiz_score .score_value {
+			color: @accent-color;
+		}
+		
+		.question {
+			background-color: lighten(@main-color, @first-layer-brightness);
+			border-color: @border-color;
+			border-radius: var(--bradius);
+			
+			.header {
+				background-color: lighten(@main-color, @first-layer-brightness) !important;
+				border-color: @border-color;
+				border-radius: var(--bradius);
+				color: saturate(@main-text-color, 30);
+			}
+			
+			.question_points_holder {
+				color: @main-text-color;	
+			}
+		}
+	}
+	
+	
+	table.summary td, table.summary tbody th {
+		background-color: @main-color !important;
+		border-color: @border-color;
+		color: @main-text-color;
+	}
+	
+	#assignment_show .student-assignment-overview, 
+	#quiz_show .quiz-header,
+	#quiz_show ul#quiz_student_details {
 		border-color: var(--line-color);
 	}
 	
