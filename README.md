@@ -1,4 +1,4 @@
-# webassign-darkmode
+# quercus-darkmode
 My take on a darkmode for the student service Quercus (which is an instance of Canvas)
 
 # Installation
