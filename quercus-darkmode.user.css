@@ -42,6 +42,36 @@
 		text-decoration: none !important;
 	}
 	
+	.btn-primary, .Button--primary, .btn, .Button, .ui-button {
+		background: var(--gen-button-color-important);
+		color: @main-text-color;
+		border: none;
+	}
+
+	.btn-primary:hover, .Button--primary:hover, .btn:hover, .Button:hover, .ui-button:hover, .ui-button:hover.ui-state-hover {
+		background: var(--gen-button-color-important-hov);
+		transition: 0.1s;
+		color: contrast(var(--gen-button-color-hov), @main-color, @main-text-color, 57%);
+	}
+	
+	#courseMenuToggle {
+		background: none;
+	}
+	
+	/* OLD BUTTON STUFF
+	.btn {
+		background: var(--gen-button-color);
+		border: none;
+		color: @main-text-color;
+		
+	}
+	
+	.btn:hover {
+		background: var(--gen-button-color-hov);
+		color: contrast(var(--gen-button-color-hov), @main-color, @main-text-color, 57%);
+	}
+	*/
+	
 	textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
 		background: @main-color !important;
 		border: none !important;
@@ -98,13 +128,34 @@
 		
 	}
 	
+	/* TODO: improve this */
+	.css-dvua1q-view--block-contextView__content {
+		background: lighten(@main-color, @second-layer-brightness);
+	}
+	
+	#immersive_reader_mount_point {
+		visibility: hidden;
+	}
+	
 	span[dir="ltr"] > span {
-		background: lighten(@main-color, @first-layer-brightness);
+		/*background: lighten(@main-color, @first-layer-brightness);*/
+		/* The above is to fix the notif. popdown menu, but this also causes many other issues with backgrounds being grey where they shouldn't. */
 		
 		> span, ul[role="menu"], ul[role="menu"] span {
 			border-width: 0px !important;
-			background: lighten(@main-color, @second-layer-brightness);
 			color: @main-text-color; 
+			padding-left: 10px;
+		}
+		
+		[id^=Badge] {
+			background: @accent-color;
+			padding-left: 0px;
+			
+			span {
+				background: none;
+				color: black;
+				padding-left: 3px; /*temp fix*/
+			}
 		}
 			
 		div {
@@ -217,6 +268,13 @@
 			border-width: 5px;
 			border-top-right-radius: var(--bradius);
 			border-bottom-right-radius: var(--bradius);
+			
+			div ul li span div {
+				background: lighten(@main-color, @second-layer-brightness);
+				border-width: 2px;
+				color: lighten(@main-text-color, @first-layer-brightness);
+			}
+			
 		}
 		
 		.NotificationBadge-styles__activityIndicator div span {
@@ -228,6 +286,12 @@
 			
 			span {
 				color: @main-text-color;
+				
+				[class*="checkbox"] {
+					background: darken(white, @first-layer-brightness);
+					color: darken(@accent-color, 10);
+					
+				}
 			}
 			
 			a span, div button span {
@@ -269,8 +333,12 @@
 		overflow: clip !important;
 	}
 }
-@-moz-document regexp("https://q.utoronto.ca/courses/.*"), url-prefix("https://q.utoronto.ca/profile"), url-prefix("https://q.utoronto.ca/files") {
+@-moz-document regexp("https://q.utoronto.ca/courses.*"), url-prefix("https://q.utoronto.ca/profile"), url-prefix("https://q.utoronto.ca/files") {
 	
+	/* Courses main page */
+	.course-list-table .course-list-table-row:hover {
+		background-color: lighten(@main-color, @first-layer-brightness);
+	}
 	#breadcrumbs, #breadcrumbs > ul > li + li:last-of-type a {
 		background-color: @main-color;
 		color: @accent-color;
@@ -294,17 +362,7 @@
 		}
 	}
 	
-	.btn {
-		background: var(--gen-button-color);
-		border: none;
-		color: @main-text-color;
-		
-	}
 	
-	.btn:hover {
-		background: var(--gen-button-color-hov);
-		color: contrast(var(--gen-button-color-hov), @main-color, @main-text-color, 57%);
-	}
 	
 	.ic-app-nav-toggle-and-crumbs {
 		border-color: var(--line-color);
@@ -320,18 +378,50 @@
 		color: @accent-color;
 	}
 	
+	/* MODULE/ANNOUCMENT ITEMS (TOPICS) */
+	.toolbarView .headerBar {
+		background: lighten(@main-color, @first-layer-brightness);
+		border: none;
+		
+	}
+	
+	.header-bar {
+			background: lighten(@main-color, @first-layer-brightness);
+			border: none;
+			border-radius: 5px;
+			padding: 10px 10px 10px 10px;
+			
+			
+			div {
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+				width: 100%;
+			}
+		}
+	
+	#content {
+		border-radius: 5px !important;
+	}
+	
 	#content > div {
 		 
-		background-color: @main-color;
+		/*background-color: lighten(@main-color, @first-layer-brightness);*/
+		color: @main-text-color;
+		border-radius: 5px;
 		
-		.list-view a.active {
-			color: red;
+		&#assignment_show {
+			background: @main-color;
 		}
 		
-		.header-bar {
-			background-color: @main-color;
+		.topic .entry-content {
 			border: none;
 		}
+		
+		.list-view a.active {
+			color: pink;
+		}
+		
 		
 		.ig-list {
 			background-color: @main-color;
@@ -367,15 +457,6 @@
 		
 		.ic-Table.ic-Table--hover-row tbody tr:hover {
 			background: lighten(@main-color, @first-layer-brightness);
-		}
-		
-		.btn-primary, .Button--primary {
-			background: var(--gen-button-color-important);
-		}
-		
-		.btn-primary:hover, .Button--primary:hover {
-			background: var(--gen-button-color-important-hov);
-			transition: 0.1s;
 		}
 		
 		--inset-bg-color: lighten(@main-color, @first-layer-brightness);
@@ -432,6 +513,7 @@
 				transition: 0.1s;
 			}
 		}
+		
 		
 		/* QUIZ STUFF */
 		.muted-notice {
